@@ -4,13 +4,22 @@ import kotlinx.serialization.Serializable
 
 /**
  * Rutas disponibles en la app.
- * Agrega aquí las nuevas pantallas como objetos o clases serializables.
  */
 @Serializable
-data object HomeRoute
+data object ListaRoute
 
+/**
+ * Pantalla de registro. Si se abre con argumentos (al tocar un producto de la lista),
+ * los campos aparecen llenos para editarlo. Con el botón "+" se abre vacía.
+ */
 @Serializable
-data class ProfileRoute(
-    val userId: String,
-    val userName: String
-)
+data class RegistroRoute(
+    val id: String = "",
+    val nombre: String = "",
+    val precio: String = ""
+) {
+    val esEdicion: Boolean get() = id.isNotEmpty()
+}
+
+/** Clave usada para devolver el producto registrado a la lista. */
+const val PRODUCTO_REGISTRADO = "producto_registrado"
